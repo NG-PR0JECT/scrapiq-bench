@@ -1,0 +1,1030 @@
+{
+ "set": 2,
+ "stamp": "2026-09-13",
+ "pages": [
+  "https://www.apache.org/licenses/LICENSE-2.0",
+  "https://www.gov.uk/government/organisations/hm-revenue-customs",
+  "https://arxiv.org/abs/1706.03762",
+  "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array",
+  "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+  "https://peps.python.org/pep-0008/",
+  "https://keepachangelog.com/en/1.1.0/",
+  "https://danluu.com/",
+  "https://github.com/pallets/flask",
+  "https://fastapi.tiangolo.com/tutorial/",
+  "https://www.gnu.org/philosophy/free-sw.en.html",
+  "https://react.dev/"
+ ],
+ "results": [
+  {
+   "kind": "license",
+   "url": "https://www.apache.org/licenses/LICENSE-2.0",
+   "tools": {
+    "raw": {
+     "ms_median": 64,
+     "ms_runs": [
+      64,
+      64
+     ],
+     "chars": 11358,
+     "words": 1581,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": "                                  Apache License                            Version 2.0, January 2004                         http://www.apache.org/licenses/     TERMS AND CONDITIO"
+    },
+    "trafilatura": {
+     "ms_median": 65,
+     "ms_runs": [
+      65,
+      64
+     ],
+     "chars": 0,
+     "words": 0,
+     "links": 0,
+     "boiler": null,
+     "malformed": 0,
+     "stable": true,
+     "empty": true,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": ""
+    },
+    "readability": {
+     "ms_median": 67,
+     "ms_runs": [
+      68,
+      66
+     ],
+     "chars": 10232,
+     "words": 1581,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION 1\\. Definitions. \"License\" shall mean the term"
+    },
+    "markitdown": {
+     "ms_median": 123,
+     "ms_runs": [
+      134,
+      111
+     ],
+     "chars": 10221,
+     "words": 1581,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION 1. Definitions. \"License\" shall mean the terms"
+    },
+    "scrapiq": {
+     "ms_median": 166,
+     "ms_runs": [
+      227,
+      105
+     ],
+     "chars": 9354,
+     "words": 1411,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "The 2.0 version of the Apache License, approved by the ASF in 2004, helps us achieve our goal of providing reliable and long-lived software products through collaborative, open-sou"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 11358,
+    "ms": 64
+   }
+  },
+  {
+   "kind": "government",
+   "url": "https://www.gov.uk/government/organisations/hm-revenue-customs",
+   "tools": {
+    "raw": {
+     "ms_median": 267,
+     "ms_runs": [
+      267,
+      267
+     ],
+     "chars": 131946,
+     "words": 6481,
+     "links": 0,
+     "boiler": 4,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": "  <!DOCTYPE html> <html class=\"govuk-template\" lang=\"en\">   <head>     <meta charset=\"utf-8\">     <title>HM Revenue &amp; Customs - GOV.UK</title>      <script src=\"/assets/collect"
+    },
+    "trafilatura": {
+     "ms_median": 351,
+     "ms_runs": [
+      371,
+      331
+     ],
+     "chars": 4956,
+     "words": 476,
+     "links": 4,
+     "boiler": 0,
+     "malformed": 2,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "# HM Revenue & Customs  ## Featured  Press release  ###              [436,000 sole traders and landlords make their tax digital](/government/news/436000-sole-traders-and-landlords-"
+    },
+    "readability": {
+     "ms_median": 314,
+     "ms_runs": [
+      316,
+      312
+     ],
+     "chars": 219,
+     "words": 39,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "7 September 2026 — Guidance  Download and access the HMRC app to manage your details, taxes and benefits.  30 July 2024 — Corporate report  This Charter explains what you can expec"
+    },
+    "markitdown": {
+     "ms_median": 450,
+     "ms_runs": [
+      415,
+      485
+     ],
+     "chars": 20255,
+     "words": 1641,
+     "links": 53,
+     "boiler": 3,
+     "malformed": 8,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "## Cookies on GOV.UK  We use some essential cookies to make this website work.  We’d like to set additional cookies to understand how you use GOV.UK, remember your settings and imp"
+    },
+    "scrapiq": {
+     "ms_median": 350,
+     "ms_runs": [
+      411,
+      288
+     ],
+     "chars": 5175,
+     "words": 476,
+     "links": 6,
+     "boiler": 0,
+     "malformed": 2,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "# HM Revenue & Customs  ## Featured  Press release  ###              [436,000 sole traders and landlords make their tax digital](/government/news/436000-sole-traders-and-landlords-"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 131984,
+    "ms": 267
+   }
+  },
+  {
+   "kind": "preprint",
+   "url": "https://arxiv.org/abs/1706.03762",
+   "tools": {
+    "raw": {
+     "ms_median": 76,
+     "ms_runs": [
+      76,
+      76
+     ],
+     "chars": 43644,
+     "words": 2831,
+     "links": 0,
+     "boiler": 4,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": "<!DOCTYPE html> <html lang=\"en\">  <head><script>document.documentElement.classList.add('js');</script>  <title>[1706.03762] Attention Is All You Need</title>   <meta name=\"viewport"
+    },
+    "trafilatura": {
+     "ms_median": 118,
+     "ms_runs": [
+      131,
+      104
+     ],
+     "chars": 3915,
+     "words": 432,
+     "links": 16,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "# Computer Science > Computation and Language    [Submitted on 12 Jun 2017 (      [v1](https://arxiv.org/abs/1706.03762v1)), last revised 2 Aug 2023 (this version, v7)] # Title:Att"
+    },
+    "readability": {
+     "ms_median": 99,
+     "ms_runs": [
+      100,
+      98
+     ],
+     "chars": 2046,
+     "words": 208,
+     "links": 10,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "[Submitted on 12 Jun 2017 ([v1](https://arxiv.org/abs/1706.03762v1)), last revised 2 Aug 2023 (this version, v7)]  # Title:Attention Is All You Need  Authors:[Ashish Vaswani](https"
+    },
+    "markitdown": {
+     "ms_median": 183,
+     "ms_runs": [
+      192,
+      174
+     ],
+     "chars": 9453,
+     "words": 862,
+     "links": 66,
+     "boiler": 3,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "[Skip to main content](#content)  [![archive](/static/base/1.0.1/images/arxiv-logo-primary-light.svg)](https://arxiv.org/)  [Search](https://arxiv.org/search) [Submit](https://arxi"
+    },
+    "scrapiq": {
+     "ms_median": 180,
+     "ms_runs": [
+      197,
+      162
+     ],
+     "chars": 4007,
+     "words": 432,
+     "links": 18,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "# Computer Science > Computation and Language    [Submitted on 12 Jun 2017 (      [v1](https://arxiv.org/abs/1706.03762v1)), last revised 2 Aug 2023 (this version, v7)] # Title:Att"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 43644,
+    "ms": 76
+   }
+  },
+  {
+   "kind": "q-and-a",
+   "url": "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array",
+   "tools": {},
+   "http": {
+    "ok": false,
+    "error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+   }
+  },
+  {
+   "kind": "ecommerce",
+   "url": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+   "tools": {
+    "raw": {
+     "ms_median": 336,
+     "ms_runs": [
+      336,
+      336
+     ],
+     "chars": 9275,
+     "words": 734,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": "  <!DOCTYPE html> <!--[if lt IE 7]>      <html lang=\"en-us\" class=\"no-js lt-ie9 lt-ie8 lt-ie7\"> <![endif]--> <!--[if IE 7]>         <html lang=\"en-us\" class=\"no-js lt-ie9 lt-ie8\"> "
+    },
+    "trafilatura": {
+     "ms_median": 343,
+     "ms_runs": [
+      344,
+      342
+     ],
+     "chars": 1474,
+     "words": 248,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "# A Light in the Attic  £51.77  In stock (22 available)  **Warning!**This is a demo website for web scraping purposes. Prices and ratings here were randomly assigned and have no re"
+    },
+    "readability": {
+     "ms_median": 342,
+     "ms_runs": [
+      343,
+      342
+     ],
+     "chars": 1422,
+     "words": 228,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "# A Light in the Attic  £51.77  __In stock (22 available)  __________  * * *  **Warning!** This is a demo website for web scraping purposes. Prices and ratings here were randomly a"
+    },
+    "markitdown": {
+     "ms_median": 402,
+     "ms_runs": [
+      399,
+      404
+     ],
+     "chars": 1777,
+     "words": 281,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "[Books to Scrape](../../index.html) We love being scraped!  * [Home](../../index.html) * [Books](../category/books_1/index.html) * [Poetry](../category/books/poetry_23/index.html) "
+    },
+    "scrapiq": {
+     "ms_median": 369,
+     "ms_runs": [
+      362,
+      376
+     ],
+     "chars": 1508,
+     "words": 248,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "# A Light in the Attic  £51.77  In stock (22 available)  **Warning!**This is a demo website for web scraping purposes. Prices and ratings here were randomly assigned and have no re"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 9279,
+    "ms": 336
+   }
+  },
+  {
+   "kind": "spec",
+   "url": "https://peps.python.org/pep-0008/",
+   "tools": {
+    "raw": {
+     "ms_median": 54,
+     "ms_runs": [
+      54,
+      54
+     ],
+     "chars": 121327,
+     "words": 10732,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": " <!DOCTYPE html> <html lang=\"en\"> <head>     <meta charset=\"utf-8\">     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">     <meta name=\"color-scheme\" content"
+    },
+    "trafilatura": {
+     "ms_median": 198,
+     "ms_runs": [
+      206,
+      190
+     ],
+     "chars": 45262,
+     "words": 6697,
+     "links": 5,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "# PEP 8 – Style Guide for Python Code  - Author: - Guido van Rossum <guido at python.org>, Barry Warsaw <barry at python.org>, Alyssa Coghlan <ncoghlan at gmail.com> - Status: - Ac"
+    },
+    "readability": {
+     "ms_median": 182,
+     "ms_runs": [
+      178,
+      185
+     ],
+     "chars": 39194,
+     "words": 5530,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "PEP 8 – Style Guide for Python Code  # PEP 8 – Style Guide for Python Code  Author:     Guido van Rossum <guido at python.org>, Barry Warsaw <barry at python.org>, Alyssa Coghlan <"
+    },
+    "markitdown": {
+     "ms_median": 327,
+     "ms_runs": [
+      334,
+      320
+     ],
+     "chars": 53826,
+     "words": 7529,
+     "links": 3,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "Following system colour scheme  Selected dark colour scheme  Selected light colour scheme  # Python Enhancement Proposals  * [Python](https://www.python.org/ \"The Python Programmin"
+    },
+    "scrapiq": {
+     "ms_median": 462,
+     "ms_runs": [
+      511,
+      413
+     ],
+     "chars": 45367,
+     "words": 6697,
+     "links": 6,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "# PEP 8 – Style Guide for [Python](https://www.python.org/) Code  - Author: - Guido van Rossum <guido at python.org>, Barry Warsaw <barry at python.org>, Alyssa Coghlan <ncoghlan a"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 121592,
+    "ms": 54
+   }
+  },
+  {
+   "kind": "changelog",
+   "url": "https://keepachangelog.com/en/1.1.0/",
+   "tools": {
+    "raw": {
+     "ms_median": 31,
+     "ms_runs": [
+      31,
+      31
+     ],
+     "chars": 26130,
+     "words": 2911,
+     "links": 2,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": "<!DOCTYPE html> <html dir='ltr' lang='en'> <head> <meta charset='utf-8'> <meta content='IE=edge' http-equiv='X-UA-Compatible'> <meta content='width=device-width, initial-scale=1.0'"
+    },
+    "trafilatura": {
+     "ms_median": 54,
+     "ms_runs": [
+      56,
+      53
+     ],
+     "chars": 15734,
+     "words": 2077,
+     "links": 13,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "# Keep a Changelog  ## Don’t let your friends dump git logs into changelogs.  [Version](https://github.com/olivierlacan/keep-a-changelog/blob/main/CHANGELOG.md)  **1.1.0**``` # Cha"
+    },
+    "readability": {
+     "ms_median": 48,
+     "ms_runs": [
+      47,
+      50
+     ],
+     "chars": 7580,
+     "words": 1101,
+     "links": 11,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "###  What is a changelog?   A changelog is a file which contains a curated, chronologically ordered list of notable changes for each version of a project.   ###  Why keep a changel"
+    },
+    "markitdown": {
+     "ms_median": 101,
+     "ms_runs": [
+      91,
+      111
+     ],
+     "chars": 17205,
+     "words": 2246,
+     "links": 17,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "Version   1.1   1.0   0.3     Language (28)   العربية (n/a)   Čeština   Dansk   Deutsch   English   Español   Français   Hrvatski (n/a)   Indonesia (n/a)   Italiano   日本語   Norsk ("
+    },
+    "scrapiq": {
+     "ms_median": 116,
+     "ms_runs": [
+      117,
+      116
+     ],
+     "chars": 15734,
+     "words": 2077,
+     "links": 13,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "# Keep a Changelog  ## Don’t let your friends dump git logs into changelogs.  [Version](https://github.com/olivierlacan/keep-a-changelog/blob/main/CHANGELOG.md)  **1.1.0**``` # Cha"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 26341,
+    "ms": 31
+   }
+  },
+  {
+   "kind": "blog-index",
+   "url": "https://danluu.com/",
+   "tools": {
+    "raw": {
+     "ms_median": 43,
+     "ms_runs": [
+      43,
+      43
+     ],
+     "chars": 22555,
+     "words": 1233,
+     "links": 0,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": "<style>d{width:4em}li{display:flex;margin:0 0 .9em}ul{margin:0;padding:0}.np{display:flex;flex-direction:row;justify-content:space-between;padding-bottom:.5em;font-style:italic}</s"
+    },
+    "trafilatura": {
+     "ms_median": 82,
+     "ms_runs": [
+      89,
+      74
+     ],
+     "chars": 17248,
+     "words": 1414,
+     "links": 202,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "- xx/xx[Patreon posts](#pt) - 09/26[How well do agents use test/verification techniques?](https://danluu.com/agentic-testing/) - 09/26[Ed Zitron's AI prediction track record](https"
+    },
+    "readability": {
+     "ms_median": 79,
+     "ms_runs": [
+      79,
+      78
+     ],
+     "chars": 17653,
+     "words": 1417,
+     "links": 202,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "  * xx/xxPatreon posts   * 09/26[How well do agents use test/verification techniques?](https://danluu.com/agentic-testing/)   * 09/26[Ed Zitron's AI prediction track record](https:"
+    },
+    "markitdown": {
+     "ms_median": 130,
+     "ms_runs": [
+      141,
+      119
+     ],
+     "chars": 17482,
+     "words": 1417,
+     "links": 208,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "* xx/xx[Patreon posts](#pt) * 09/26[How well do agents use test/verification techniques?](https://danluu.com/agentic-testing/) * 09/26[Ed Zitron's AI prediction track record](https"
+    },
+    "scrapiq": {
+     "ms_median": 203,
+     "ms_runs": [
+      142,
+      265
+     ],
+     "chars": 17248,
+     "words": 1414,
+     "links": 202,
+     "boiler": 1,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "- xx/xx[Patreon posts](#pt) - 09/26[How well do agents use test/verification techniques?](https://danluu.com/agentic-testing/) - 09/26[Ed Zitron's AI prediction track record](https"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 22559,
+    "ms": 43
+   }
+  },
+  {
+   "kind": "repo",
+   "url": "https://github.com/pallets/flask",
+   "tools": {
+    "raw": {
+     "ms_median": 470,
+     "ms_runs": [
+      470,
+      470
+     ],
+     "chars": 292273,
+     "words": 15931,
+     "links": 0,
+     "boiler": 5,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": "        <!DOCTYPE html> <html   lang=\"en\"      data-color-mode=\"auto\" data-light-theme=\"light\" data-dark-theme=\"dark\"   data-a11y-animated-images=\"system\" data-a11y-link-underlines"
+    },
+    "trafilatura": {
+     "ms_median": 607,
+     "ms_runs": [
+      559,
+      655
+     ],
+     "chars": 1347,
+     "words": 181,
+     "links": 5,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "Flask is a lightweight [WSGI](https://wsgi.readthedocs.io/) web application framework. It is designed to make getting started quick and easy, with the ability to scale up to comple"
+    },
+    "readability": {
+     "ms_median": 532,
+     "ms_runs": [
+      532,
+      533
+     ],
+     "chars": 1399,
+     "words": 177,
+     "links": 5,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "Flask is a lightweight [WSGI](https://wsgi.readthedocs.io/) web application framework. It is designed to make getting started quick and easy, with the ability to scale up to comple"
+    },
+    "markitdown": {
+     "ms_median": 701,
+     "ms_runs": [
+      693,
+      708
+     ],
+     "chars": 12047,
+     "words": 954,
+     "links": 76,
+     "boiler": 4,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "[Skip to content](#start-of-content)  ## Navigation Menu  [Sign in](/login?return_to=https%3A%2F%2Fgithub.com%2Fpallets%2Fflask)  Appearance settings  * Platform    + AI CODE CREAT"
+    },
+    "scrapiq": {
+     "ms_median": 670,
+     "ms_runs": [
+      861,
+      479
+     ],
+     "chars": 1365,
+     "words": 181,
+     "links": 5,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "Flask is a lightweight [WSGI](https://wsgi.readthedocs.io/) web application framework. It is designed to make getting started quick and easy, with the ability to scale up to comple"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 292307,
+    "ms": 470
+   }
+  },
+  {
+   "kind": "tutorial",
+   "url": "https://fastapi.tiangolo.com/tutorial/",
+   "tools": {
+    "raw": {
+     "ms_median": 90,
+     "ms_runs": [
+      90,
+      90
+     ],
+     "chars": 105845,
+     "words": 5913,
+     "links": 0,
+     "boiler": 4,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": " <!doctype html> <html lang=\"en\" class=\"no-js\">   <head>            <meta charset=\"utf-8\">       <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">                "
+    },
+    "trafilatura": {
+     "ms_median": 133,
+     "ms_runs": [
+      144,
+      123
+     ],
+     "chars": 7286,
+     "words": 864,
+     "links": 5,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "# Tutorial - User Guide[¶](#tutorial-user-guide)  This tutorial shows you how to use **FastAPI** with most of its features, step by step.  Each section gradually builds on the prev"
+    },
+    "readability": {
+     "ms_median": 123,
+     "ms_runs": [
+      121,
+      124
+     ],
+     "chars": 7342,
+     "words": 855,
+     "links": 5,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "# Tutorial - User Guide  This tutorial shows you how to use **FastAPI** with most of its features, step by step.  Each section gradually builds on the previous ones, but it's struc"
+    },
+    "markitdown": {
+     "ms_median": 232,
+     "ms_runs": [
+      240,
+      224
+     ],
+     "chars": 19337,
+     "words": 1821,
+     "links": 22,
+     "boiler": 4,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "[ ] [ ]  [Skip to content](#tutorial-user-guide)  [Deploy on **FastAPI Cloud** 🚀](https://fastapicloud.com)  [**FastAPI Conf '26** — Oct 28, 2026, Amsterdam 🎤](https://fastapiconf."
+    },
+    "scrapiq": {
+     "ms_median": 279,
+     "ms_runs": [
+      269,
+      290
+     ],
+     "chars": 7318,
+     "words": 864,
+     "links": 5,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "# [Tutorial - User Guide](././)[¶](#tutorial-user-guide)  This tutorial shows you how to use **[FastAPI](./..)** with most of its features, step by step.  Each section gradually bu"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 105932,
+    "ms": 90
+   }
+  },
+  {
+   "kind": "essay",
+   "url": "https://paulgraham.com/greatwork.html",
+   "tools": {
+    "raw": {
+     "ms_median": 772,
+     "ms_runs": [
+      772,
+      772
+     ],
+     "chars": 79767,
+     "words": 12750,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": "<html><head><meta name=\"Keywords\" content=\"\" /><title>How to Do Great Work</title><!-- <META NAME=\"ROBOTS\" CONTENT=\"NOODP\"> --> <link rel=\"shortcut icon\" href=\"http://ycombinator.c"
+    },
+    "trafilatura": {
+     "ms_median": 822,
+     "ms_runs": [
+      839,
+      805
+     ],
+     "chars": 67121,
+     "words": 11868,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "| July 2023 If you collected lists of techniques for doing great work in a lot of different fields, what would the intersection look like? I decided to find out by making it. Partl"
+    },
+    "readability": {
+     "ms_median": 861,
+     "ms_runs": [
+      863,
+      860
+     ],
+     "chars": 68611,
+     "words": 11837,
+     "links": 4,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "![](https://s.turbifycdn.com/aah/paulgraham/bel-7.gif)| ![](https://sep.turbifycdn.com/ca/Img/trans_1x1.gif)| [![](https://s.turbifycdn.com/aah/paulgraham/bel-8.gif)](index.html)  "
+    },
+    "markitdown": {
+     "ms_median": 886,
+     "ms_runs": [
+      907,
+      864
+     ],
+     "chars": 67770,
+     "words": 11866,
+     "links": 4,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "|  |  |  |  |  | | --- | --- | --- | --- | --- | | ![](https://s.turbifycdn.com/aah/paulgraham/bel-7.gif) | ![](https://sep.turbifycdn.com/ca/Img/trans_1x1.gif) | [![](https://s.tu"
+    },
+    "scrapiq": {
+     "ms_median": 724,
+     "ms_runs": [
+      904,
+      543
+     ],
+     "chars": 67121,
+     "words": 11868,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "| July 2023 If you collected lists of techniques for doing great work in a lot of different fields, what would the intersection look like? I decided to find out by making it. Partl"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 79767,
+    "ms": 772
+   }
+  },
+  {
+   "kind": "client-rendered",
+   "url": "https://react.dev/",
+   "tools": {
+    "raw": {
+     "ms_median": 452,
+     "ms_runs": [
+      452,
+      452
+     ],
+     "chars": 272408,
+     "words": 20282,
+     "links": 0,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "baseline: raw HTML as fetched",
+     "preview": "<!DOCTYPE html><html lang=\"en\" dir=\"ltr\"><head><meta charSet=\"utf-8\" data-next-head=\"\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" data-next-head=\"\"/><scri"
+    },
+    "trafilatura": {
+     "ms_median": 602,
+     "ms_runs": [
+      599,
+      605
+     ],
+     "chars": 3820,
+     "words": 619,
+     "links": 2,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "library on fetched HTML (same kwargs as Scrapiq)",
+     "preview": "## Create user interfaces from components  React lets you build user interfaces out of individual pieces called components. Create your own React components like `Thumbnail`, `Like"
+    },
+    "readability": {
+     "ms_median": 575,
+     "ms_runs": [
+      591,
+      559
+     ],
+     "chars": 2972,
+     "words": 479,
+     "links": 2,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "readability-lxml + html2text",
+     "preview": "## Create user interfaces from components  React lets you build user interfaces out of individual pieces called components. Create your own React components like `Thumbnail`, `Like"
+    },
+    "markitdown": {
+     "ms_median": 704,
+     "ms_runs": [
+      721,
+      686
+     ],
+     "chars": 15964,
+     "words": 1407,
+     "links": 53,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "MarkItDown on fetched HTML",
+     "preview": "[![logo by @sawaratsuki1004](/_next/image?url=%2Fimages%2Fuwu.png&w=128&q=75 \"logo by @sawaratsuki1004\")](/)  [React](/)  [v19.3](/versions)  Search`⌘``Ctrl``K`  [Learn](/learn)  ["
+    },
+    "scrapiq": {
+     "ms_median": 502,
+     "ms_runs": [
+      545,
+      459
+     ],
+     "chars": 3820,
+     "words": 619,
+     "links": 2,
+     "boiler": 0,
+     "malformed": 0,
+     "stable": true,
+     "empty": false,
+     "note": "hosted API: fetch + extract in one call",
+     "preview": "## Create user interfaces from components  React lets you build user interfaces out of individual pieces called components. Create your own React components like `Thumbnail`, `Like"
+    }
+   },
+   "http": {
+    "ok": true,
+    "bytes": 272438,
+    "ms": 452
+   }
+  }
+ ]
+}

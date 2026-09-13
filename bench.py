@@ -10,7 +10,12 @@ Compares end-to-end "URL in -> clean markdown out" for:
 
 Per page/tool: wall-clock ms, chars, words, links, boilerplate-marker hits,
 and stability (two runs -> identical output hash?).
+
+Usage:
+  python bench.py --set 1 --out results-2026-09-12.json
+  python bench.py --set 2 --out results-2026-09-13-set2.json
 """
+import argparse
 import hashlib
 import json
 import re
@@ -25,25 +30,11 @@ from markitdown import MarkItDown
 from readability import Document
 import html2text
 
-UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-import os
-SCRAPIQ = os.environ.get("SCRAPIQ_URL", "http://localhost:8001/v1/extract")
-OUT = Path(__file__).resolve().parent
+from pages import PAGE_SETS
 
-PAGES = [
-    ("docs", "https://docs.python.org/3/library/json.html"),
-    ("docs", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET"),
-    ("docs", "https://doc.rust-lang.org/book/ch01-00-getting-started.html"),
-    ("encyclopedia", "https://en.wikipedia.org/wiki/Retrieval-augmented_generation"),
-    ("repo", "https://github.com/NG-PR0JECT/scrapiq"),
-    ("registry", "https://pypi.org/project/trafilatura/"),
-    ("blog", "https://simonwillison.net/"),
-    ("forum", "https://news.ycombinator.com/"),
-    ("product", "https://stripe.com/docs/api"),
-    ("news", "https://www.theguardian.com/international"),
-    ("book", "https://www.gutenberg.org/ebooks/1342"),
-    ("landing", "https://scrapiq.io/"),
-]
+UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+SCRAPIQ = "http://localhost:8001/v1/extract"
+OUT = Path(__file__).resolve().parent
 
 # lowercase substrings that indicate site chrome leaked into the body
 BOILER = [
@@ -64,7 +55,8 @@ def fetch(url: str) -> tuple[str, float, int]:
 
 def md_metrics(text: str) -> dict:
     if not text:
-        return {"chars": 0, "words": 0, "links": 0, "boiler": None, "malformed": 0}
+        # an empty output contains no boilerplate markers and no links, by definition
+        return {"chars": 0, "words": 0, "links": 0, "boiler": 0, "malformed": 0}
     low = text.lower()
     return {
         "chars": len(text),
@@ -128,8 +120,17 @@ TOOLS = ["raw", "trafilatura", "readability", "markitdown", "scrapiq"]
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--set", type=int, default=1, choices=sorted(PAGE_SETS))
+    ap.add_argument("--out", default=None, help="output json (default: results.json / results-set2.json)")
+    ap.add_argument("--stamp", default=None, help="ISO date written into the json header")
+    args = ap.parse_args()
+
+    pages = PAGE_SETS[args.set]
+    out_path = OUT / (args.out or ("results.json" if args.set == 1 else f"results-set{args.set}.json"))
+
     results = []
-    for kind, url in PAGES:
+    for kind, url in pages:
         row = {"kind": kind, "url": url, "tools": {}}
         try:
             html, html_ms, raw_bytes = fetch(url)
@@ -161,8 +162,14 @@ def main():
             }
         results.append(row)
 
-    (OUT / "results.json").write_text(json.dumps(results, indent=1, ensure_ascii=False))
-    print("\nwrote", OUT / "results.json")
+    payload = {
+        "set": args.set,
+        "stamp": args.stamp,
+        "pages": [u for _, u in pages],
+        "results": results,
+    }
+    out_path.write_text(json.dumps(payload, indent=1, ensure_ascii=False))
+    print("\nwrote", out_path)
     return results
 
 

@@ -1,7 +1,8 @@
 # scrapiq-bench
 
 A small, reproducible benchmark of **URL → clean markdown** for LLM/RAG ingestion,
-run against 12 real pages. It measures four tools plus a raw-HTML baseline:
+run against real pages on the live web. It measures four tools plus a raw-HTML
+baseline:
 
 | tool | what it is |
 |---|---|
@@ -11,9 +12,21 @@ run against 12 real pages. It measures four tools plus a raw-HTML baseline:
 | `readability-lxml` | `readability.Document` + `html2text` |
 | `MarkItDown` | `MarkItDown().convert_stream(...)` on the fetched HTML |
 
-Numbers live in **[RESULTS.md](RESULTS.md)** and the raw per-run JSON is in
-`results.json`. Nothing is hand-transcribed: `bench.py` collects, `emit_results.py`
-renders the tables.
+Two page sets, 23 pages that answered:
+
+- **set 1** — the original 12 (docs, encyclopedia, repo, package registry, blog
+  index, forum, product docs, news front, book page, landing page). Ran on
+  2026-09-12 **and again on 2026-09-13** as a reproducibility check.
+- **set 2** — 12 more archetypes (licence text, a government organisation page, a
+  preprint abstract, a Q&A page, an e-commerce product page, a language spec, a
+  changelog, a static blog index, a source-repository landing page, tutorial docs,
+  a long-form essay, a client-rendered docs site). One of the twelve
+  (Stack Overflow) refused a plain fetch and is reported as a boundary, not a score.
+
+Numbers live in **[RESULTS.md](RESULTS.md)** and the raw per-run JSON is committed
+next to it (`results-2026-09-12.json`, `results-2026-09-13.json`,
+`results-2026-09-13-set2.json`). Nothing is hand-transcribed: `bench.py` collects,
+`emit_results.py` renders.
 
 ## Disclosure first: Scrapiq wraps trafilatura
 
@@ -24,38 +37,61 @@ output_format="markdown", with_metadata=False` — see
 [`src/extract.py`](https://github.com/NG-PR0JECT/scrapiq/blob/main/src/extract.py)).
 
 So this is not "Scrapiq's parser beats trafilatura's parser". It's the same
-parser. The delta measured here is what the API layer adds on top of it.
+parser. The delta measured here is what the API layer adds on top of it — plus a
+BeautifulSoup fallback that runs when trafilatura returns empty, and a
+link-recovery pass over anchors the extractor dropped.
 
 ## What the numbers say
 
-Medians over the 12 pages (full tables in [RESULTS.md](RESULTS.md)):
+Medians over the 23 pages that answered (full per-page tables in
+[RESULTS.md](RESULTS.md)):
 
-| tool | median ms | median chars | median links | avg boilerplate markers | broken link targets | near-empty pages |
+| tool | cold ms | median chars | median links | avg boilerplate markers | broken link targets | near-empty pages |
 |---|---:|---:|---:|---:|---:|---:|
-| raw HTML | 75 | 119,682 | 0 | 2.4 | 0 | 0/12 |
-| trafilatura | 188 | 3,840 | 4 | 0.2 | 0 | 0/12 |
-| Scrapiq API | 424 | 5,158 | 8 | 0.2 | 0 | 0/12 |
-| readability-lxml | 168 | 2,383 | 0 | 0.2 | 0 | **2/12** |
-| MarkItDown | 352 | 24,354 | 54 | 2.2 | 0 | 0/12 |
+| raw HTML | 97 | 105,845 | 0 | 2.1 | 0 | 0/23 |
+| trafilatura | 253 | 4,449 | 5 | 0.2 | 2 | 1/23 |
+| Scrapiq API | 411 | 6,648 | 6 | 0.3 | 2 | 0/23 |
+| readability-lxml | 217 | 3,814 | 1 | 0.2 | 0 | **2/23** |
+| MarkItDown | 414 | 17,205 | 34 | 1.9 | 8 | 0/23 |
 
-1. **Scrapiq returned at least as much text as the bare library on 12/12 pages.**
-   The biggest recovery is a forum front page: **+2,876 chars and +32 links** that
-   trafilatura dropped, because Scrapiq re-attaches anchors the extractor skipped.
-2. **The cost of the service layer is ~0.24 s of median latency** (424 ms vs
-   188 ms), which is the HTTP round trip plus the server-side fetch.
-3. **readability-lxml returned nothing useful on 2/12 pages** (1 char on a forum
-   front page, 181 chars on a news front). It is the fastest, and also the one
-   that silently fails.
-4. **MarkItDown keeps the most text and the most chrome** — 24k median chars and
-   2.2 boilerplate markers per page (`cookie`, `sign in`, `subscribe`, …) against
-   0.2 for trafilatura/Scrapiq/readability. It is a document converter doing a
-   web page's job; the structure comes through, the nav does too.
-5. **All four tools produced byte-identical output across two runs** on all 12
-   pages, so run-to-run instability was not observable here (single machine,
+1. **The bare library call silently returns nothing on 1 of 23 pages.** On the
+   Apache licence page, `trafilatura.extract(...)` with these exact kwargs returns
+   **0 characters** — no error, no warning. Scrapiq returns **9,354** because its
+   BeautifulSoup fallback fires. Same call, same input, and one of them gives you
+   an empty document that looks like a successful extraction.
+2. **readability-lxml returned under 200 characters on 2/23 pages** — a forum front
+   page (**1 char**) and a news front (181 chars) — and never raised an error. It
+   is the second-fastest tool and the one that fails without telling you.
+3. **MarkItDown keeps the chrome with the content.** 4/23 pages carry 4+ boilerplate
+   markers (`cookie`, `sign in`, `subscribe`, `privacy policy`, …) in its output,
+   against 0 for Scrapiq — e.g. 8 markers and 58,237 chars on a news front vs 0
+   markers and 4,068 chars for Scrapiq. It also produced 8 structurally broken link
+   targets across the set, against 2 for trafilatura and 2 for Scrapiq.
+4. **Scrapiq returned at least as much text as the same-kwargs library on 23/23
+   pages, and strictly more on 17/23** (median +70 characters, largest +9,354). The
+   useful framing is not "more text is better" — it is that on the pages where the
+   parser gives up, the API still hands you the page.
+5. **The API layer costs roughly +0.16 s of median latency** over the library path
+   (411 ms cold vs 253 ms), which is the HTTP round trip plus the server-side fetch.
+   Raw HTML is ~24× the size of the cleaned output (105,845 → 6,648 median chars);
+   at ~4 chars/token that is the difference between ~26k and ~1.7k tokens per page,
+   before any chunking.
+6. **All tools produced byte-identical output across their two runs on all 23
+   pages**, so run-to-run instability was not observable here (single machine,
    within a minute, no A/B deploys in flight — not proof of long-term stability).
-6. **Raw HTML is ~23× the size of the cleaned output** (119,682 → 5,158 median
-   chars). At ~4 chars/token that is roughly the difference between 30k and 1.3k
-   tokens per page, before any chunking.
+
+## Reproducibility: the same 12 pages, 24 hours apart
+
+Set 1 was run twice. On 7/12 pages Scrapiq's output was byte-for-byte identical the
+next day. The five that moved are pages whose *content* changed overnight: four live
+front/index pages (Wikipedia edits, Hacker News, a blog index, a news front) and
+this project's own repository page, which we edited the day before. The ranking of
+the tools was identical on both days.
+
+Latency, on the other hand, is the noisy part: day 2 was slower across the board for
+every tool (e.g. trafilatura 188 → 470 ms median), which is network conditions, not
+code. Treat the latency tables as one measurement, not as a constant. Full day-1 vs
+day-2 comparison in [RESULTS.md](RESULTS.md).
 
 ## The benchmark found a real bug in Scrapiq
 
@@ -74,26 +110,26 @@ Fixed the same day
 ([`7775cca`](https://github.com/NG-PR0JECT/scrapiq/commit/7775cca)) by refusing to
 inject labels shorter than 4 chars and refusing to inject at any position that
 falls inside an existing `[label](url)` or bare URL. The same page now returns
-22,737 chars of clean markdown with 0 broken link targets, and the case is pinned
-by regression tests. This is the main reason `malformed link targets` reads 0 in
-the tables above — before the fix it read 79.
+~23,000 chars of clean markdown with 0 broken link targets, and the case is pinned
+by regression tests.
 
 ## When to use what
 
 - **You want the article text only, fast, and you're fine with a dependency:**
   trafilatura. It is the best boilerplate remover in this comparison, and it is
-  what Scrapiq runs underneath.
-- **You want the page's link structure preserved:** MarkItDown keeps 54 links
-  median vs 8 for Scrapiq's markdown — at the price of the surrounding chrome.
+  what Scrapiq runs underneath — but check that you got something back, because on
+  the licence page above it returned nothing at all.
+- **You want the page's link structure preserved:** MarkItDown keeps 34 links
+  median vs 6 for Scrapiq — at the price of the surrounding chrome (1.9 boilerplate
+  markers per page vs 0.3).
 - **You want a fast main-article read on generic pages:** readability is the
-  quickest, but check that you got something — it silently returned ~nothing on
-  2/12 pages here.
+  quickest, but verify the output — it silently returned ~nothing on 2/23 pages here.
 - **You want one deterministic call from a pipeline, with metadata and a stable
-  contract:** Scrapiq. It adds a metadata block (title/description/author/
-  publish date/language/canonical/word count), schema-constrained JSON output,
-  timeouts, size limits, retries, and it self-hosts with one Docker command —
-  which matters when the alternative is running extraction inside every service
-  that needs a page. Cost: roughly +0.24 s and one network hop per page.
+  contract:** Scrapiq. It adds a metadata block (title/description/author/publish
+  date/language/canonical/word count), schema-constrained JSON output, timeouts,
+  size limits, retries, a fallback when the parser returns empty, and it self-hosts
+  with one Docker command — which matters when the alternative is running extraction
+  inside every service that needs a page. Cost: roughly +0.16 s and one network hop.
 
 ## Reproduce it
 
@@ -103,29 +139,36 @@ pip install trafilatura readability-lxml markitdown html2text httpx
 
 # start a Scrapiq instance (or point SCRAPIQ at a hosted one) and make sure
 # POST http://localhost:8001/v1/extract answers /health first
-python bench.py          # writes results.json
-python emit_results.py   # renders RESULTS.md from results.json
+python bench.py --set 1 --stamp 2026-09-13 --out results-2026-09-13.json
+python bench.py --set 2 --stamp 2026-09-13 --out results-2026-09-13-set2.json
+python emit_results.py   # renders RESULTS.md from the committed JSON
 ```
 
-`bench.py` holds the page list and the boilerplate-marker heuristic — edit both
-to benchmark your own URLs.
+`pages.py` holds both page sets (`PAGE_SET_1`, `PAGE_SET_2`) and `bench.py` holds
+the boilerplate-marker heuristic — edit both to benchmark your own URLs.
+`retry_page.py <results.json> <url> [replacement_url]` re-measures a single page
+(e.g. one that timed out) without re-running the whole set.
 
 ## Caveats
 
-- **12 pages, one machine, one hour, one date.** Treat it as a spot check, not a
-  ranking. The pages are deliberately mixed (docs, encyclopedia, repo, registry,
-  blog, forum, product docs, news front, book page, landing page) but they are
-  not a random sample of the web.
-- **Everything is fetch-based.** No tool here executes JavaScript, so JS-only
-  pages are thin for all of them, and nothing here measures anti-bot behaviour —
-  none of these 12 pages blocked any tool.
+- **23 pages, one machine, two dates.** Treat it as a spot check, not a ranking.
+  The pages are deliberately mixed across archetypes, but they are not a random
+  sample of the web.
+- **Everything is fetch-based.** No tool here executes JavaScript, so JS-only pages
+  are thin for all of them. Stack Overflow refused the plain fetch outright (403)
+  and is reported as a refusal rather than scored zero — anti-bot behaviour is a
+  real boundary of this approach and nothing here claims to solve it.
 - **`boilerplate markers` is a crude heuristic** (a lowercased substring count of
   `cookie`, `sign in`, `subscribe`, `privacy policy`, …). It flags chrome leaking
   into the body. It is not a content-quality score.
-- **Bigger is not better.** A tool that keeps 24k chars is not four times better
-  than one that keeps 5k; it mostly means less was thrown away. Read the
-  per-page table, not just the medians.
-- Latency numbers include network fetch time, which varies with the target site
-  and the machine. Run it on your own hardware if the timing matters to you.
+- **Bigger is not better.** A tool that keeps 17k chars is not three times better
+  than one that keeps 6k; it mostly means less was thrown away. Read the per-page
+  table, not just the medians.
+- **Latency numbers include network fetch time**, which varies with the target site,
+  the machine and the day — the day-1/day-2 table shows how much. Run it on your
+  own hardware if the timing matters to you.
+- **The Scrapiq column is measured with the API's cache in play for the second of
+  the two runs per page.** `RESULTS.md` reports the first (cold) call separately for
+  that reason.
 
 Scrapiq is MIT-licensed: https://github.com/NG-PR0JECT/scrapiq
