@@ -167,15 +167,26 @@ def main():
                 if r["tools"]["trafilatura"]["chars"] < NEAR_EMPTY and r["tools"]["scrapiq"]["chars"] > 1000]
     if fallback:
         A(f"**1. The library-only call silently returns nothing on "
-          f"{len(fallback)}/{len(combined)} pages while the API returns the page.**")
+          f"{len(fallback)}/{len(combined)} pages while the API returns the page — "
+          f"and the cause is the response type, not the extractor.**")
         A("Scrapiq runs `trafilatura.extract(...)` with these exact kwargs; when that")
-        A("returns empty it falls back to a BeautifulSoup pass before giving up. On these")
-        A("pages the bare library call produces nothing at all, with no error:\n")
+        A("returns empty it falls back to a BeautifulSoup pass before giving up. The")
+        A("empty result is not a parser defect: it is an HTML extractor handed a")
+        A("response that is not HTML. On these pages the bare library call produces")
+        A("nothing at all, with no error:\n")
         for r in fallback:
             t, s = r["tools"]["trafilatura"], r["tools"]["scrapiq"]
             A(f"- `{page_name(r)}` ({KIND_LABEL.get(r['kind'], r['kind'])}) — "
               f"trafilatura **{t['chars']:,} chars**, Scrapiq **{s['chars']:,}**")
         A("")
+        A("Reproduced 2026-09-14 (trafilatura 2.2.0, `verify_ct_license.py`): the Apache")
+        A("licence URL is served as `Content-Type: text/plain` — 11,358 characters of")
+        A("licence text, no markup. Wrapping the same characters in `<pre>` makes the")
+        A("library return 11,332, and the page's HTML twin (`LICENSE-2.0.html`) extracts")
+        A("fine, so nothing is wrong with the extraction itself. The finding is therefore")
+        A("narrow and testable: a pipeline that pipes whatever the server returned into")
+        A("an HTML extractor gets an empty document that looks like a successful")
+        A("extraction whenever the response is `text/plain`, JSON or XML.\n")
     empty_read = [r for r in combined if r["tools"]["readability"]["empty"]]
     if empty_read:
         A(f"**2. readability-lxml returned under {NEAR_EMPTY} characters on "

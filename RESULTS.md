@@ -85,12 +85,23 @@ client-rendered docs site.
 
 ## What the two sets together show
 
-**1. The library-only call silently returns nothing on 1/23 pages while the API returns the page.**
+**1. The library-only call silently returns nothing on 1/23 pages while the API returns the page — and the cause is the response type, not the extractor.**
 Scrapiq runs `trafilatura.extract(...)` with these exact kwargs; when that
-returns empty it falls back to a BeautifulSoup pass before giving up. On these
-pages the bare library call produces nothing at all, with no error:
+returns empty it falls back to a BeautifulSoup pass before giving up. The
+empty result is not a parser defect: it is an HTML extractor handed a
+response that is not HTML. On these pages the bare library call produces
+nothing at all, with no error:
 
 - `www.apache.org/licenses/LICENSE-2.0` (license text) — trafilatura **0 chars**, Scrapiq **9,354**
+
+Reproduced 2026-09-14 (trafilatura 2.2.0, `verify_ct_license.py`): the Apache
+licence URL is served as `Content-Type: text/plain` — 11,358 characters of
+licence text, no markup. Wrapping the same characters in `<pre>` makes the
+library return 11,332, and the page's HTML twin (`LICENSE-2.0.html`) extracts
+fine, so nothing is wrong with the extraction itself. The finding is therefore
+narrow and testable: a pipeline that pipes whatever the server returned into
+an HTML extractor gets an empty document that looks like a successful
+extraction whenever the response is `text/plain`, JSON or XML.
 
 **2. readability-lxml returned under 200 characters on 2/23 pages**, while never raising an error:
 

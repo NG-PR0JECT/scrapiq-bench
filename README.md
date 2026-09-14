@@ -54,11 +54,18 @@ Medians over the 23 pages that answered (full per-page tables in
 | readability-lxml | 217 | 3,814 | 1 | 0.2 | 0 | **2/23** |
 | MarkItDown | 414 | 17,205 | 34 | 1.9 | 8 | 0/23 |
 
-1. **The bare library call silently returns nothing on 1 of 23 pages.** On the
-   Apache licence page, `trafilatura.extract(...)` with these exact kwargs returns
-   **0 characters** — no error, no warning. Scrapiq returns **9,354** because its
-   BeautifulSoup fallback fires. Same call, same input, and one of them gives you
-   an empty document that looks like a successful extraction.
+1. **The bare library call silently returns nothing on 1 of 23 pages — and the
+   cause is the response type, not the extractor.** The Apache licence URL is
+   served as `Content-Type: text/plain`: 11,358 characters of licence text with no
+   markup at all. `trafilatura.extract(...)` is an HTML extractor, so it returns
+   **0 characters** — no error, no warning — while Scrapiq returns **9,354** through
+   its fallback. The claim is deliberately narrow: wrap the same 11,358 characters
+   in `<pre>` and the library returns 11,332, and the page's own HTML twin
+   (`LICENSE-2.0.html`) extracts fine, so nothing is wrong with the extraction.
+   What is wrong is a pipeline that pipes *whatever the server returned* into an
+   HTML extractor: whenever the response is `text/plain`, JSON or XML, it gets an
+   empty document that looks like a successful extraction. Reproduction
+   (2026-09-14, trafilatura 2.2.0): [`verify_ct_license.py`](verify_ct_license.py).
 2. **readability-lxml returned under 200 characters on 2/23 pages** — a forum front
    page (**1 char**) and a news front (181 chars) — and never raised an error. It
    is the second-fastest tool and the one that fails without telling you.
@@ -118,7 +125,9 @@ by regression tests.
 - **You want the article text only, fast, and you're fine with a dependency:**
   trafilatura. It is the best boilerplate remover in this comparison, and it is
   what Scrapiq runs underneath — but check that you got something back, because on
-  the licence page above it returned nothing at all.
+  the licence page above it returned nothing at all (that response is
+  `text/plain`, which an HTML extractor cannot read; see the reproducibility note
+  under the numbers).
 - **You want the page's link structure preserved:** MarkItDown keeps 34 links
   median vs 6 for Scrapiq — at the price of the surrounding chrome (1.9 boilerplate
   markers per page vs 0.3).
@@ -148,6 +157,10 @@ python emit_results.py   # renders RESULTS.md from the committed JSON
 the boilerplate-marker heuristic — edit both to benchmark your own URLs.
 `retry_page.py <results.json> <url> [replacement_url]` re-measures a single page
 (e.g. one that timed out) without re-running the whole set.
+`verify_ct_license.py` is the follow-up on finding 1 below: it checks what the
+server actually served on the licence URL and shows the same text extracting
+normally once it is presented as HTML (this is what separates "the library
+failed" from "the response was never HTML").
 
 ## Caveats
 
