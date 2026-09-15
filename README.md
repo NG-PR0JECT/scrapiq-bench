@@ -120,6 +120,38 @@ falls inside an existing `[label](url)` or bare URL. The same page now returns
 ~23,000 chars of clean markdown with 0 broken link targets, and the case is pinned
 by regression tests.
 
+## Silent failures: the output that looks like a success
+
+Not every bad extraction raises. On 2026-09-15 we ran `detect_silent.py` — one
+fetch per URL, three extractors, flag anything under 200 characters — over the 24
+benchmark pages, and recorded the response `Content-Type` alongside the count so a
+non-HTML response cannot be mistaken for a parser failure.
+
+| tool | silent-empty (<200 chars, no error) | of which on a 2xx response |
+|---|---|---|
+| trafilatura | 2/24 | 1 (a `text/plain` licence file — not HTML, an HTML extractor cannot read it) |
+| readability-lxml | 3/24 | **2 (both `text/html`, both HTTP 200 with real content)** |
+| Scrapiq | 1/24 | 0 |
+
+The two middle rows are the point: `news.ycombinator.com` (34 KB of HTML) came back
+as **1 character** and `theguardian.com/international` (1.3 MB of HTML) as **195
+characters** through readability-lxml — no exception, no warning, HTTP 200 both
+times, while trafilatura returned 4,025 and 2,548 characters on the same responses.
+A pipeline that trusts "the call returned" gets an empty document that is
+indistinguishable in the logs from a page with nothing on it.
+
+```bash
+# run it against your own URLs (one per line) or against a benchmark set
+python detect_silent.py urls.txt --out silent.json
+python detect_silent.py --set 2
+```
+
+It prints, per URL and per tool: HTTP status, `Content-Type`, response bytes, chars
+out, and a `SILENT EMPTY` flag; the JSON it writes keeps the same rows so you can
+diff two days. It is deliberately cheap — one fetch per URL — so it can run on a
+sitemap sample or in CI. The threshold (`--threshold`, default 200) is a knob, not
+a verdict: the check is "did this look like it worked and produce nothing".
+
 ## When to use what
 
 - **You want the article text only, fast, and you're fine with a dependency:**
@@ -161,6 +193,8 @@ the boilerplate-marker heuristic — edit both to benchmark your own URLs.
 server actually served on the licence URL and shows the same text extracting
 normally once it is presented as HTML (this is what separates "the library
 failed" from "the response was never HTML").
+`detect_silent.py` is the sweep version of that question — point it at any URL list
+and it reports which extractions came back empty while the fetch succeeded.
 
 ## Caveats
 
