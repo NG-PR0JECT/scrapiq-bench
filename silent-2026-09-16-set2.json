@@ -1,0 +1,335 @@
+{
+ "stamp": "2026-09-16",
+ "threshold": 200,
+ "pages": [
+  "https://www.apache.org/licenses/LICENSE-2.0",
+  "https://www.gov.uk/government/organisations/hm-revenue-customs",
+  "https://arxiv.org/abs/1706.03762",
+  "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array",
+  "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+  "https://peps.python.org/pep-0008/",
+  "https://keepachangelog.com/en/1.1.0/",
+  "https://danluu.com/",
+  "https://github.com/pallets/flask",
+  "https://fastapi.tiangolo.com/tutorial/",
+  "https://paulgraham.com/greatwork.html",
+  "https://react.dev/"
+ ],
+ "counted": 11,
+ "results": [
+  {
+   "url": "https://www.apache.org/licenses/LICENSE-2.0",
+   "tools": {
+    "trafilatura": {
+     "chars": 0,
+     "empty": true,
+     "error": null
+    },
+    "readability": {
+     "chars": 10232,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 9354,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/plain",
+    "bytes": 11358,
+    "html": false
+   }
+  },
+  {
+   "url": "https://www.gov.uk/government/organisations/hm-revenue-customs",
+   "tools": {
+    "trafilatura": {
+     "chars": 4956,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 219,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 5175,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 132193,
+    "html": true
+   }
+  },
+  {
+   "url": "https://arxiv.org/abs/1706.03762",
+   "tools": {
+    "trafilatura": {
+     "chars": 3915,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 2046,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 4007,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 43644,
+    "html": true
+   }
+  },
+  {
+   "url": "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array",
+   "tools": {},
+   "http": {
+    "status": 403,
+    "content_type": "text/html",
+    "bytes": 5565,
+    "html": true
+   },
+   "skipped": "non-2xx fetch (403) — nothing to extract"
+  },
+  {
+   "url": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+   "tools": {
+    "trafilatura": {
+     "chars": 1474,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 1422,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 1508,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 9279,
+    "html": true
+   }
+  },
+  {
+   "url": "https://peps.python.org/pep-0008/",
+   "tools": {
+    "trafilatura": {
+     "chars": 45262,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 39194,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 45367,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 121592,
+    "html": true
+   }
+  },
+  {
+   "url": "https://keepachangelog.com/en/1.1.0/",
+   "tools": {
+    "trafilatura": {
+     "chars": 15734,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 7580,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 15734,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 26341,
+    "html": true
+   }
+  },
+  {
+   "url": "https://danluu.com/",
+   "tools": {
+    "trafilatura": {
+     "chars": 17248,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 17653,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 17248,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 22559,
+    "html": true
+   }
+  },
+  {
+   "url": "https://github.com/pallets/flask",
+   "tools": {
+    "trafilatura": {
+     "chars": 1347,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 1399,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 1365,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 292899,
+    "html": true
+   }
+  },
+  {
+   "url": "https://fastapi.tiangolo.com/tutorial/",
+   "tools": {
+    "trafilatura": {
+     "chars": 7286,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 7342,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 7318,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 105932,
+    "html": true
+   }
+  },
+  {
+   "url": "https://paulgraham.com/greatwork.html",
+   "tools": {
+    "trafilatura": {
+     "chars": 67121,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 68611,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 67121,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 79767,
+    "html": true
+   }
+  },
+  {
+   "url": "https://react.dev/",
+   "tools": {
+    "trafilatura": {
+     "chars": 3820,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 2972,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 3820,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 272438,
+    "html": true
+   }
+  }
+ ],
+ "silent": [
+  {
+   "url": "https://www.apache.org/licenses/LICENSE-2.0",
+   "tool": "trafilatura",
+   "content_type": "text/plain",
+   "bytes": 11358,
+   "status": 200
+  }
+ ],
+ "explicit_errors": [],
+ "fetch_errors": [
+  {
+   "url": "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array",
+   "why": "HTTP 403",
+   "content_type": "text/html"
+  }
+ ]
+}

@@ -1,0 +1,351 @@
+{
+ "stamp": "2026-09-16",
+ "threshold": 200,
+ "pages": [
+  "https://docs.python.org/3/library/json.html",
+  "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET",
+  "https://doc.rust-lang.org/book/ch01-00-getting-started.html",
+  "https://en.wikipedia.org/wiki/Retrieval-augmented_generation",
+  "https://github.com/NG-PR0JECT/scrapiq",
+  "https://pypi.org/project/trafilatura/",
+  "https://simonwillison.net/",
+  "https://news.ycombinator.com/",
+  "https://stripe.com/docs/api",
+  "https://www.theguardian.com/international",
+  "https://www.gutenberg.org/ebooks/1342",
+  "https://scrapiq.io/"
+ ],
+ "counted": 12,
+ "results": [
+  {
+   "url": "https://docs.python.org/3/library/json.html",
+   "tools": {
+    "trafilatura": {
+     "chars": 29563,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 4522,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 29633,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 112700,
+    "html": true
+   }
+  },
+  {
+   "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET",
+   "tools": {
+    "trafilatura": {
+     "chars": 2896,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 1148,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 3261,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 214227,
+    "html": true
+   }
+  },
+  {
+   "url": "https://doc.rust-lang.org/book/ch01-00-getting-started.html",
+   "tools": {
+    "trafilatura": {
+     "chars": 315,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 383,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 315,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 22877,
+    "html": true
+   }
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Retrieval-augmented_generation",
+   "tools": {
+    "trafilatura": {
+     "chars": 23961,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 23973,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 24264,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 249977,
+    "html": true
+   }
+  },
+  {
+   "url": "https://github.com/NG-PR0JECT/scrapiq",
+   "tools": {
+    "trafilatura": {
+     "chars": 5340,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 4714,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 5422,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 305235,
+    "html": true
+   }
+  },
+  {
+   "url": "https://pypi.org/project/trafilatura/",
+   "tools": {
+    "trafilatura": {
+     "chars": 10209,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 9819,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 10347,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 127668,
+    "html": true
+   }
+  },
+  {
+   "url": "https://simonwillison.net/",
+   "tools": {
+    "trafilatura": {
+     "chars": 27773,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 32793,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 28419,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 83793,
+    "html": true
+   }
+  },
+  {
+   "url": "https://news.ycombinator.com/",
+   "tools": {
+    "trafilatura": {
+     "chars": 4192,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 1,
+     "empty": true,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 7142,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 34708,
+    "html": true
+   }
+  },
+  {
+   "url": "https://stripe.com/docs/api",
+   "tools": {
+    "trafilatura": {
+     "chars": 7077,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 4634,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 7115,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 1364942,
+    "html": true
+   }
+  },
+  {
+   "url": "https://www.theguardian.com/international",
+   "tools": {
+    "trafilatura": {
+     "chars": 15858,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 123,
+     "empty": true,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 19055,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 1299327,
+    "html": true
+   }
+  },
+  {
+   "url": "https://www.gutenberg.org/ebooks/1342",
+   "tools": {
+    "trafilatura": {
+     "chars": 2389,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 719,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 2416,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 24848,
+    "html": true
+   }
+  },
+  {
+   "url": "https://scrapiq.io/",
+   "tools": {
+    "trafilatura": {
+     "chars": 1697,
+     "empty": false,
+     "error": null
+    },
+    "readability": {
+     "chars": 1797,
+     "empty": false,
+     "error": null
+    },
+    "scrapiq": {
+     "chars": 1697,
+     "empty": false,
+     "error": null
+    }
+   },
+   "http": {
+    "status": 200,
+    "content_type": "text/html",
+    "bytes": 10232,
+    "html": true
+   }
+  }
+ ],
+ "silent": [
+  {
+   "url": "https://news.ycombinator.com/",
+   "tool": "readability",
+   "content_type": "text/html",
+   "bytes": 34708,
+   "status": 200
+  },
+  {
+   "url": "https://www.theguardian.com/international",
+   "tool": "readability",
+   "content_type": "text/html",
+   "bytes": 1299327,
+   "status": 200
+  }
+ ],
+ "explicit_errors": [],
+ "fetch_errors": []
+}

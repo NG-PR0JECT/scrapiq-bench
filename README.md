@@ -125,20 +125,44 @@ by regression tests.
 Not every bad extraction raises. On 2026-09-15 we ran `detect_silent.py` — one
 fetch per URL, three extractors, flag anything under 200 characters — over the 24
 benchmark pages, and recorded the response `Content-Type` alongside the count so a
-non-HTML response cannot be mistaken for a parser failure.
+non-HTML response cannot be mistaken for a parser failure. Re-run 2026-09-16 on the
+same pages (`silent-2026-09-16-set1.json`, `-set2.json`); identical results.
 
-| tool | silent-empty (<200 chars, no error) | of which on a 2xx response |
+Counted here = the fetch returned 2xx, so there was a real response to extract.
+Silence = 2xx **and** under 200 characters out **and** no error raised.
+
+| tool | silent-empty (of 23 fetched pages) | where |
 |---|---|---|
-| trafilatura | 2/24 | 1 (a `text/plain` licence file — not HTML, an HTML extractor cannot read it) |
-| readability-lxml | 3/24 | **2 (both `text/html`, both HTTP 200 with real content)** |
-| Scrapiq | 1/24 | 0 |
+| trafilatura | **1** | `apache.org/licenses/LICENSE-2.0` — 0 chars from a `text/plain` response (not HTML; an HTML extractor cannot read it) |
+| readability-lxml | **2** | `news.ycombinator.com` (1 char) and `theguardian.com/international` (195 → 123 chars on the re-run) — both `text/html`, both HTTP 200 with real content |
+| Scrapiq | **0** | — |
 
-The two middle rows are the point: `news.ycombinator.com` (34 KB of HTML) came back
-as **1 character** and `theguardian.com/international` (1.3 MB of HTML) as **195
-characters** through readability-lxml — no exception, no warning, HTTP 200 both
-times, while trafilatura returned 4,025 and 2,548 characters on the same responses.
-A pipeline that trusts "the call returned" gets an empty document that is
-indistinguishable in the logs from a page with nothing on it.
+The readability row is the point: `news.ycombinator.com` is 34 KB of HTML that
+came back as **1 character**, and `theguardian.com/international` is 1.3 MB of HTML
+that came back as **195 characters** (123 on the re-run, same page, same verdict) —
+no exception, no warning, HTTP 200 both times, while trafilatura returned 4,025 and
+2,548 characters on the same responses. A pipeline that trusts "the call returned"
+gets an empty document that is indistinguishable in the logs from a page with
+nothing on it.
+
+**The 24th URL is reported separately, not as a silent empty.** The Stack Overflow
+Q&A page answers a plain fetch with **HTTP 403** and a challenge page. Nothing in
+that response is content, so "the extractor returned 41 chars" would say nothing
+about the extractor — the fetch failed, loudly, and the row is excluded from every
+tool's column above. For the hosted API the same URL is the opposite of silent: it
+answers `{"detail": "HTTP 403 from target"}`. Explicit failure is the acceptable
+outcome; silence is the bug.
+
+### Correction (2026-09-16)
+
+The 2026-09-15 version of this table said **Scrapiq 1/24**. That row was the 403
+challenge page: the first version of the script fed the blocked body into the
+extractors and counted "under 200 chars, no exception" as silent, which is exactly
+the confusion this repo exists to point at — it never checked whether the *fetch*
+had succeeded, and it treated the API's explicit error response as an empty
+document. `detect_silent.py` now (a) skips non-2xx fetches entirely and (b) reads an
+API error response as an explicit error. All four runs are kept in the repo, so the
+correction is auditable rather than a claim.
 
 ```bash
 # run it against your own URLs (one per line) or against a benchmark set

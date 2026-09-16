@@ -151,6 +151,39 @@ call. The cold column is the first call only:
 | readability-lxml | 217 | 221 |
 | MarkItDown | 414 | 402 |
 
+## Silent-failure sweep, 2026-09-15 and the corrected re-run, 2026-09-16
+
+`detect_silent.py` (one fetch per URL, three extractors, `SILENT EMPTY` =
+2xx fetch **and** under 200 characters out **and** no error raised) ran over both
+page sets on 2026-09-15, and again on 2026-09-16 on the same pages.
+
+| tool | 2026-09-15 | 2026-09-16 |
+|---|---|---|
+| trafilatura | 1/23 | 1/23 — `www.apache.org/licenses/LICENSE-2.0`, 0 chars, `Content-Type: text/plain` |
+| readability-lxml | 2/23 | 2/23 — `news.ycombinator.com` 1 char, `theguardian.com/international` 195 → 123 chars |
+| Scrapiq API | 0/23 | 0/23 |
+
+Both silent faults are sticky in the direction that matters: the same two pages,
+the same tools, two days apart. The Guardian page moved from 195 to 123 characters
+between runs — a live front page, so the number moves, but it stays an order of
+magnitude below what the same response yields through trafilatura (2,548 chars) and
+below the 200-character line both days.
+
+The Stack Overflow Q&A page is excluded from every column on both days: it answers
+a plain fetch with HTTP 403 and a challenge page, so there is no content to
+attribute to any extractor. Against the hosted API that URL returns
+`{"detail": "HTTP 403 from target"}` — an explicit failure, which is the correct
+outcome and the one the benchmark is arguing for.
+
+**Correction.** The 2026-09-15 table in README.md read `Scrapiq 1/24`. That entry
+was this 403 page: the first version of the script extracted from the blocked body
+and counted "fewer than 200 chars, no exception" as silence without ever checking
+whether the fetch had succeeded, and it scored the API's explicit error response as
+an empty document. The script now skips non-2xx fetches and treats an API error as
+an error (`--include-non-2xx` restores the old behaviour, for anyone who wants to
+see the difference). Raw runs: `silent-2026-09-15-set{1,2}.json`,
+`silent-2026-09-16-set{1,2}.json`.
+
 ## Notes on the method
 
 - Everything is fetch-based. Neither Scrapiq nor any baseline in this table
@@ -165,4 +198,6 @@ call. The cold column is the first call only:
   time) and the full round trip for `scrapiq`, whose server does its own fetch.
 - Set 1 is 12 pages, set 2 is 12 more, one of which refused the fetch. 23 scored
   pages is still a spot check, not a ranking of the whole web.
+- One URL that refuses the fetch is a result about that URL, not about any
+  extractor. It is counted separately everywhere in this repo since 2026-09-16.
 
